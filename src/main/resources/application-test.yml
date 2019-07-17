@@ -3,16 +3,16 @@ spring:
     enabled: false
     table: schema_version
   datasource:
-    url: jdbc:h2:file:./h2/org
+    url: jdbc:h2:mem:h2db
   jpa:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.H2Dialect
-    show-sql: true
+    show-sql: false
 
   h2:
     console:
-      enabled: true
+      enabled: false
 
 logging.file: logs/application.log
 logging:

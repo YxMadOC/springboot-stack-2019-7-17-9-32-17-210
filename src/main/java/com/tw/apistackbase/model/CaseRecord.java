@@ -3,25 +3,24 @@ package com.tw.apistackbase.model;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-public class CaseInfo {
+public class CaseRecord {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(strategy = "uuid", name = "uuid")
-    private String caseId;
+    private String caseRecordId;
 
     @NotNull
-    private String caseName;
+    private String subjectiveDescription;
 
     @NotNull
-    private Long caseTime;
+    private String objectiveDescription;
 
-    @OneToOne
-    @JoinColumn(name = "caseId")
-    private CaseRecord caseRecord;
 }

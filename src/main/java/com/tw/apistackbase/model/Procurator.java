@@ -1,14 +1,11 @@
 package com.tw.apistackbase.model;
 
-import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
-@Data
 @Entity
 public class Procurator {
 
@@ -17,7 +14,21 @@ public class Procurator {
     @GenericGenerator(strategy = "uuid", name = "uuid")
     private String procuratorId;
 
-    @NotNull
     private String procuratorName;
 
+    public String getProcuratorId() {
+        return procuratorId;
+    }
+
+    public void setProcuratorId(String procuratorId) {
+        this.procuratorId = procuratorId;
+    }
+
+    public String getProcuratorName() {
+        return procuratorName;
+    }
+
+    public void setProcuratorName(String procuratorName) {
+        this.procuratorName = procuratorName;
+    }
 }

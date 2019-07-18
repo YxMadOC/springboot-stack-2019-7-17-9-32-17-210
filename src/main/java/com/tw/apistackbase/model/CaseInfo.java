@@ -1,12 +1,9 @@
 package com.tw.apistackbase.model;
 
-import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
-@Data
 @Entity
 public class CaseInfo {
 
@@ -15,18 +12,55 @@ public class CaseInfo {
     @GenericGenerator(strategy = "uuid", name = "uuid")
     private String caseId;
 
-    @NotNull
     private String caseName;
 
-    @NotNull
     private Long caseTime;
 
     @OneToOne
     @JoinColumn(name = "caseRecordId")
     private CaseRecord caseRecord;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "procuratorateId")
     private Procuratorate procuratorate;
+
+    public String getCaseId() {
+        return caseId;
+    }
+
+    public void setCaseId(String caseId) {
+        this.caseId = caseId;
+    }
+
+    public String getCaseName() {
+        return caseName;
+    }
+
+    public void setCaseName(String caseName) {
+        this.caseName = caseName;
+    }
+
+    public Long getCaseTime() {
+        return caseTime;
+    }
+
+    public void setCaseTime(Long caseTime) {
+        this.caseTime = caseTime;
+    }
+
+    public CaseRecord getCaseRecord() {
+        return caseRecord;
+    }
+
+    public void setCaseRecord(CaseRecord caseRecord) {
+        this.caseRecord = caseRecord;
+    }
+
+    public Procuratorate getProcuratorate() {
+        return procuratorate;
+    }
+
+    public void setProcuratorate(Procuratorate procuratorate) {
+        this.procuratorate = procuratorate;
+    }
 }

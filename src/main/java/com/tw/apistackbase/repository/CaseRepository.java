@@ -9,6 +9,6 @@ public interface CaseRepository extends JpaRepository<CaseInfo, String> {
 
     List<CaseInfo> findAllByOrderByCaseTimeDesc();
 
-    List<CaseInfo> findByCaseName(String caseName);
+    CaseInfo findByCaseName(String caseName);
 
 }

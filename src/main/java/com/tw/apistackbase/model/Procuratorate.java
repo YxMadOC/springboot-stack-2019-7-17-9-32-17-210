@@ -1,14 +1,11 @@
 package com.tw.apistackbase.model;
 
 
-import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Data
 @Entity
 public class Procuratorate {
 
@@ -17,7 +14,6 @@ public class Procuratorate {
     @GenericGenerator(strategy = "uuid", name = "uuid")
     private String procuratorateId;
 
-    @NotNull
     @Column(unique = true, length = 50)
     private String procuratorateName;
 
@@ -25,4 +21,27 @@ public class Procuratorate {
     @JoinColumn(name = "procuratorateId")
     private List<Procurator> procurators;
 
+    public String getProcuratorateId() {
+        return procuratorateId;
+    }
+
+    public void setProcuratorateId(String procuratorateId) {
+        this.procuratorateId = procuratorateId;
+    }
+
+    public String getProcuratorateName() {
+        return procuratorateName;
+    }
+
+    public void setProcuratorateName(String procuratorateName) {
+        this.procuratorateName = procuratorateName;
+    }
+
+    public List<Procurator> getProcurators() {
+        return procurators;
+    }
+
+    public void setProcurators(List<Procurator> procurators) {
+        this.procurators = procurators;
+    }
 }

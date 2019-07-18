@@ -1,5 +1,6 @@
 package com.tw.apistackbase.repository;
 
+import com.tw.apistackbase.model.CaseInfo;
 import com.tw.apistackbase.model.Procurator;
 import com.tw.apistackbase.model.Procuratorate;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,22 @@ class ProcuratorateRepositoryTest {
         Procuratorate fetched = procuratorateRepository.findAll().get(0);
 
         assertNotNull(fetched.getProcurators().get(0));
+    }
+
+    @Test
+    void should_save_with_cases_find_return_with_cases() {
+        Procuratorate procuratorate = new Procuratorate();
+        procuratorate.setProcuratorateName("ZHA");
+        CaseInfo caseInfo = new CaseInfo();
+        caseInfo.setCaseName("A");
+        caseInfo.setCaseTime(123456789L);
+        procuratorate.setCaseInfos(Collections.singletonList(caseInfo));
+        procuratorateRepository.save(procuratorate);
+
+        Procuratorate fetched = procuratorateRepository.findAll().get(0);
+
+        assertNotNull(fetched.getCaseInfos().get(0));
+
     }
 
 }

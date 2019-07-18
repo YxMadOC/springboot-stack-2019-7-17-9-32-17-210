@@ -21,6 +21,9 @@ public class Procuratorate {
     @JoinColumn(name = "procuratorateId")
     private List<Procurator> procurators;
 
+    @OneToMany(mappedBy = "procuratorate", cascade = CascadeType.ALL)
+    private List<CaseInfo> caseInfos;
+
     public String getProcuratorateId() {
         return procuratorateId;
     }
@@ -43,5 +46,13 @@ public class Procuratorate {
 
     public void setProcurators(List<Procurator> procurators) {
         this.procurators = procurators;
+    }
+
+    public List<CaseInfo> getCaseInfos() {
+        return caseInfos;
+    }
+
+    public void setCaseInfos(List<CaseInfo> caseInfos) {
+        this.caseInfos = caseInfos;
     }
 }

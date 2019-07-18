@@ -20,8 +20,7 @@ public class CaseInfo {
     @JoinColumn(name = "caseRecordId")
     private CaseRecord caseRecord;
 
-    @ManyToOne
-    @JoinColumn(name = "procuratorateId")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Procuratorate procuratorate;
 
     public String getCaseId() {

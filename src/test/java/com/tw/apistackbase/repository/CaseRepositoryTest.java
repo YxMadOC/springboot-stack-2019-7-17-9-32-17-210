@@ -2,12 +2,14 @@ package com.tw.apistackbase.repository;
 
 import com.tw.apistackbase.model.CaseInfo;
 import com.tw.apistackbase.model.CaseRecord;
+import com.tw.apistackbase.model.Procuratorate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,9 +22,11 @@ class CaseRepositoryTest {
     @Autowired
     private CaseRepository caseRepository;
 
+    @Autowired
+    private ProcuratorateRepository procuratorateRepository;
+
     @Test
     void should_find_all_cases_order_by_time_desc() {
-
         CaseInfo caseInfo1 = new CaseInfo();
         caseInfo1.setCaseName("A");
         caseInfo1.setCaseTime(123456789L);
@@ -64,7 +68,22 @@ class CaseRepositoryTest {
         CaseInfo fetched = caseRepository.findByCaseName("A");
 
         assertNotNull(fetched.getCaseRecord());
+    }
 
+    @Test
+    void should_return_case_with_procuratorate_if_case_has() {
+        Procuratorate procuratorate = new Procuratorate();
+        procuratorate.setProcuratorateName("ZHA");
+        CaseInfo caseInfo = new CaseInfo();
+        caseInfo.setCaseName("A");
+        caseInfo.setCaseTime(123456789L);
+        caseInfo.setProcuratorate(procuratorate);
+        procuratorate.setCaseInfos(Collections.singletonList(caseInfo));
+        procuratorateRepository.save(procuratorate);
+
+        CaseInfo fetched = caseRepository.findByCaseName("A");
+
+        assertNotNull(fetched.getProcuratorate());
     }
 
 }

@@ -36,4 +36,16 @@ class CaseRepositoryTest {
         assertEquals("A", fetchedCases.get(1).getCaseName());
     }
 
+    @Test
+    void should_find_case_by_name() {
+        CaseInfo caseInfo = new CaseInfo();
+        caseInfo.setCaseName("A");
+        caseInfo.setCaseTime(123456789L);
+        caseRepository.saveAndFlush(caseInfo);
+
+        CaseInfo fetched = caseRepository.findByCaseName("A");
+
+        assertEquals("A", fetched.getCaseName());
+    }
+
 }

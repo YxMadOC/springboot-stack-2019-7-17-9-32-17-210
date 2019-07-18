@@ -1,6 +1,7 @@
 package com.tw.apistackbase.repository;
 
 import com.tw.apistackbase.model.CaseInfo;
+import com.tw.apistackbase.model.CaseRecord;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
@@ -46,6 +48,23 @@ class CaseRepositoryTest {
         CaseInfo fetched = caseRepository.findByCaseName("A");
 
         assertEquals("A", fetched.getCaseName());
+    }
+
+    @Test
+    void should_save_with_case_record_find_return_with_case_record() {
+        CaseInfo caseInfo = new CaseInfo();
+        caseInfo.setCaseName("A");
+        caseInfo.setCaseTime(123456789L);
+        CaseRecord caseRecord = new CaseRecord();
+        caseRecord.setObjectiveDescription("AAA");
+        caseRecord.setSubjectiveDescription("BBB");
+        caseInfo.setCaseRecord(caseRecord);
+        caseRepository.saveAndFlush(caseInfo);
+
+        CaseInfo fetched = caseRepository.findByCaseName("A");
+
+        assertNotNull(fetched.getCaseRecord());
+
     }
 
 }

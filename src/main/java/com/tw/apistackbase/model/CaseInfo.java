@@ -16,7 +16,7 @@ public class CaseInfo {
 
     private Long caseTime;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "caseRecordId")
     private CaseRecord caseRecord;
 

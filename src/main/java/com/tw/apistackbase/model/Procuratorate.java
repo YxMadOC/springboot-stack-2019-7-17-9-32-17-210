@@ -17,7 +17,7 @@ public class Procuratorate {
     @Column(unique = true, length = 50)
     private String procuratorateName;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "procuratorateId")
     private List<Procurator> procurators;
 
